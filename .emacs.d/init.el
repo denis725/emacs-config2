@@ -339,12 +339,24 @@ modify `kill-ring'."
     (newline-and-indent)
     (insert "import pdb; pdb.set_trace()")
     (highlight-lines-matching-regexp "^[ ]*import pdb; pdb.set_trace()"))
+
+  ;; Use IPython for REPL
+  ;; https://realpython.com/emacs-the-best-python-editor/#integration-with-jupyter-and-ipython
+  (setq python-shell-interpreter "jupyter"
+	python-shell-interpreter-args "console --simple-prompt"
+	python-shell-prompt-detect-failure-warning nil)
+  (add-to-list 'python-shell-completion-native-disabled-interpreters
+	       "jupyter")
   )
 
 (use-package pyvenv
   :ensure t
   :config (setenv "WORKON_HOME" "~/anaconda3/envs"))
 
+
+(use-package python-pytest
+  :ensure t
+  :bind ("C-c p" . python-pytest-popup))
 
 ;; FLYCHECK
 (use-package flycheck
