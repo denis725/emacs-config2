@@ -1,0 +1,8 @@
+*.desktop
+*.lock
+*~
+.emacs.d/custom.el
+.emacs.d/elpa/
+.emacs.d/recentf
+.emacs.d/tramp
+.emacs.d/transient/
