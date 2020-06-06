@@ -60,8 +60,10 @@
 ;;deactivate sound
 (setq visible-bell t)
 
-;; SESSION
+;; show matching parenthesis etc.
+(show-paren-mode 1)
 
+;; SESSION
 ;; reload buffers when opening
 (desktop-save-mode 1)
 (if (file-exists-p "~/.emacs.d/desktop.el")
@@ -267,7 +269,7 @@ modify `kill-ring'."
     (if (not (string= bname "*shell*"))
         (other-window 1))
     (switch-to-buffer "*shell*")
-    (end-of-buffer)
+    (goto-char (point-max))
     (comint-previous-input 1)
     (comint-send-input)
     (if (not (string= bname "*shell*"))
@@ -315,6 +317,7 @@ modify `kill-ring'."
   :bind
   (
    ("C-x p" . runpytest)
+   ("C-=" . elpy-goto-assignment)
    ("M-p" . python-add-breakpoint))
 
   :config
@@ -366,7 +369,8 @@ modify `kill-ring'."
   (add-hook 'python-mode-hook 'flycheck-mode)
   :config
   ;; https://github.com/flycheck/flycheck/issues/1437
-  (setq flycheck-python-pylint-executable "pylint"))
+  (setq flycheck-python-pylint-executable "pylint")
+  (setq flycheck-pylintrc "pylintrc"))
 
 
 ;; CRUX
@@ -381,7 +385,6 @@ modify `kill-ring'."
 
 
 ;; YASNIPPET
-;; yasnippet
 (use-package yasnippet
   :ensure t
 
@@ -395,7 +398,8 @@ modify `kill-ring'."
   (setq yas-indent-line 'fixed))
 
 
-;; IVY, SWIPER, COUNCIL
+;; SEARCH
+;; Ivy, Swiper, Council
 (use-package swiper
   :demand
   :ensure t)
@@ -437,8 +441,8 @@ modify `kill-ring'."
   ("M-x" . counsel-M-x)
   ("C-s" . swiper)
   ("C-x C-f" . counsel-find-file)
-  ("C-c r" . counsel-git-grep)
-  ("C-c C-o" . ivy-occur)
+  ("C-c r" . counsel-rg)
+  ("C-c C-o" . occur)  ;; ivy-occur seems to be broken https://github.com/abo-abo/swiper/issues/2571
   )
 
 
@@ -635,7 +639,7 @@ modify `kill-ring'."
   :ensure t)
 
 
-;; LOOKS
+;; APPEARANCE
 (use-package zenburn-theme
   :demand
   :ensure t)
