@@ -1,0 +1,4 @@
+* My Emacs config
+Main improvement compared to previous one is that it's more cleaned up
+and uses ~use-package~ instead of checking in (and needing to update)
+all MELPA packages.
