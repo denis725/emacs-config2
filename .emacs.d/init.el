@@ -315,23 +315,17 @@ modify `kill-ring'."
 
 ;; PYTHON
 
-;; elpy
-(use-package elpy
+;; anaconda mode
+(use-package anaconda-mode
   :ensure t
-  :defer t
 
   :init
-  (advice-add 'python-mode :before 'elpy-enable)
-  ;; macro for running pytest
-  (fset 'runpytest
-	(lambda (&optional arg) "Keyboard macro." (interactive "p")
-	  (kmacro-exec-ring-item
-	   (quote ([24 111 24 98 115 104 101 return 18 112 121 46 116 101 115 116 32 return return] 0 "%d")) arg)))
+  (add-hook 'python-mode-hook 'anaconda-mode)
+  (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
 
   :bind
   (
    ("C-x p" . runpytest)
-   ("C-=" . elpy-goto-assignment)
    ("M-p" . python-add-breakpoint))
 
   :config
@@ -340,14 +334,14 @@ modify `kill-ring'."
     "Beginning of paragraph or def if Python mode."
     (interactive)
     (if (equal major-mode 'python-mode)
-	(beginning-of-python-def-or-class)
+	(python-nav-backward-defun)
       (backward-paragraph)))
 
   (defun my-forw-paragraph-or-fun-end ()
     "End of paragraph or def if Python mode."
     (interactive)
     (if (equal major-mode 'python-mode)
-	(end-of-python-def-or-class)
+	(python-nav-forward-defun)
       (forward-paragraph)))
 
   (defun python-add-breakpoint ()
@@ -369,7 +363,6 @@ modify `kill-ring'."
 (use-package pyvenv
   :ensure t
   :config (setenv "WORKON_HOME" "~/anaconda3/envs"))
-
 
 (use-package python-pytest
   :ensure t
