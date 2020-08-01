@@ -325,7 +325,7 @@ modify `kill-ring'."
 
   :bind
   (
-   ("C-x p" . runpytest)
+   ("C-x p" . my-runpytest)
    ("M-p" . python-add-breakpoint))
 
   :config
@@ -350,6 +350,11 @@ modify `kill-ring'."
     (newline-and-indent)
     (insert "import pdb; pdb.set_trace()")
     (highlight-lines-matching-regexp "^[ ]*import pdb; pdb.set_trace()"))
+
+  ;; macro for running pytest
+  (fset 'my-runpytest
+	(lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([24 111 24 98 115 104 101 return 18 112 121 46 116 101 115 116 32 return return] 0 "%d")) arg)))
+  (global-set-key (kbd "C-x p") 'runpytest)
 
   ;; Use IPython for REPL
   ;; https://realpython.com/emacs-the-best-python-editor/#integration-with-jupyter-and-ipython
