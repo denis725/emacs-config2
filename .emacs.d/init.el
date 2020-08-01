@@ -326,6 +326,8 @@ modify `kill-ring'."
   :bind
   (
    ("C-x p" . my-runpytest)
+   ("M-<left>" . python-indent-shift-left)
+   ("M-<right>" . python-indent-shift-right)
    ("M-p" . python-add-breakpoint))
 
   :config
