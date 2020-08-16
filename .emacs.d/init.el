@@ -652,6 +652,14 @@ modify `kill-ring'."
 (use-package org-re-reveal
   :ensure t)
 
+;; from https://protesilaos.com/dotemacs/
+(use-package org-superstar
+  :ensure
+  :after org
+  :config
+  (setq org-superstar-remove-leading-stars t)
+  (setq org-superstar-headline-bullets-list
+        '("◇" "◉" "○" "▷")))
 
 ;; APPEARANCE
 (use-package zenburn-theme
