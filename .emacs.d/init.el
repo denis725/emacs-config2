@@ -356,7 +356,7 @@ modify `kill-ring'."
   ;; macro for running pytest
   (fset 'my-runpytest
 	(lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([24 111 24 98 115 104 101 return 18 112 121 46 116 101 115 116 32 return return] 0 "%d")) arg)))
-  (global-set-key (kbd "C-x p") 'runpytest)
+  (global-set-key (kbd "C-x p") 'my-runpytest)
 
   ;; Use IPython for REPL
   ;; https://realpython.com/emacs-the-best-python-editor/#integration-with-jupyter-and-ipython
