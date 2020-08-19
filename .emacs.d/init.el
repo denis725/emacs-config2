@@ -145,6 +145,16 @@
         (kill-region start end)
       (kill-word arg))))
 
+;; opposite of fill-paragraph
+;; https://stackoverflow.com/a/6707838
+(defun my-unfill-paragraph ()
+  "Replace newline chars in current paragraph by single spaces.
+This command does the reverse of `fill-paragraph'."
+  (interactive)
+  (let ((fill-column most-positive-fixnum))
+    (fill-paragraph nil)))
+(global-set-key (kbd "M-Q") 'my-unfill-paragraph)
+
 
 ;; smart shift lines
 
