@@ -647,6 +647,8 @@ modify `kill-ring'."
   (setq org-refile-use-outline-path 'file)
   (setq org-outline-path-complete-in-steps nil)
 
+  (add-hook 'org-mode-hook #'visual-line-mode)
+
   (org-babel-do-load-languages
    'org-babel-load-languages
    '(
