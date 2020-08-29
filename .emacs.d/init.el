@@ -665,11 +665,11 @@ modify `kill-ring'."
 ;; from https://protesilaos.com/dotemacs/
 (use-package org-superstar
   :ensure
-  :after org
+  :init
+  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
   :config
   (setq org-superstar-remove-leading-stars t)
-  (setq org-superstar-headline-bullets-list
-        '("◇" "◉" "○" "▷")))
+  (setq org-superstar-headline-bullets-list '("◉" ("○" ?◈) "◆" "◇" "▶" "▷")))
 
 ;; APPEARANCE
 (use-package zenburn-theme
