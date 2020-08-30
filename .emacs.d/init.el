@@ -236,6 +236,19 @@ modify `kill-ring'."
 (global-set-key (kbd "M-<up>") 'smart-shift-up)
 (global-set-key (kbd "M-<down>") 'smart-shift-down)
 
+;; custom command to comment and copy a region
+(defun my-comment-and-copy ()
+  "Comment the selected region and copy it below."
+  (interactive)
+  (kill-ring-save (region-beginning) (region-end))
+  (exchange-point-and-mark)
+  (comment-region (region-beginning) (region-end))
+  (goto-char (region-end))
+  (open-line 1)
+  (yank)
+  )
+(global-set-key (kbd "C-c #") 'my-comment-and-copy)
+
 
 ;; BUFFERS & WINDOWS
 ;; Switch to previous buffer
@@ -689,15 +702,4 @@ modify `kill-ring'."
   :config (beacon-mode 1))
 
 
-;; custom command to comment and copy a region
-(defun my-comment-and-copy ()
-  "Comment the selected region and copy it below."
-  (interactive)
-  (kill-ring-save (region-beginning) (region-end))
-  (exchange-point-and-mark)
-  (comment-region (region-beginning) (region-end))
-  (goto-char (region-end))
-  (open-line 1)
-  (yank)
   )
-(global-set-key (kbd "C-c #") 'my-comment-and-copy)
