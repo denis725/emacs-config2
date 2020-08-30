@@ -701,5 +701,20 @@ modify `kill-ring'."
   :ensure t
   :config (beacon-mode 1))
 
+;; MARKUP LANGUAGES
 
+;; rst mode
+
+(use-package rst
+  :init
+  (defun my-rst-insert-external-link ()
+    "Insert a link in rst mode."
+    (interactive)
+    (let* ((url (read-string "Enter URL: "))
+	   (desc (read-string "Enter description: ")))
+      (insert (format "`%s <%s>`_" desc url))))
+  :bind
+  ;; add command C-c i to insert external link, C-c C-l is taken
+  ;; already
+  ("C-c i" . my-rst-insert-external-link)
   )
