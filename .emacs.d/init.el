@@ -686,6 +686,31 @@ modify `kill-ring'."
   (setq org-superstar-remove-leading-stars t)
   (setq org-superstar-headline-bullets-list '("◉" ("○" ?◈) "◆" "◇" "▶" "▷")))
 
+
+;; ORG ROAM
+;; https://github.com/org-roam/org-roam
+;; https://www.orgroam.com/
+;; https://blog.jethro.dev/posts/introducing_org_roam/
+
+;; org-roam-graph by default expects to find the dot executable from
+;; the graphviz package in the exec-path. Ensure graphviz is installed
+;; and found if you want to use this feature or customize your
+;; configuration for org-roam-graph to use a different tool.
+(use-package org-roam
+  :ensure t
+  :hook
+  (after-init . org-roam-mode)
+  :custom
+  (org-roam-directory "~/work/orga")
+  :bind
+  (:map org-roam-mode-map
+        (("C-c n l" . org-roam)
+         ("C-c n f" . org-roam-find-file)
+         ("C-c n g" . org-roam-graph-show))
+        :map org-mode-map
+        (("C-c n i" . org-roam-insert))
+        (("C-c n I" . org-roam-insert-immediate))))
+
 ;; APPEARANCE
 (use-package zenburn-theme
   :demand
@@ -718,3 +743,12 @@ modify `kill-ring'."
   ;; already
   ("C-c i" . my-rst-insert-external-link)
   )
+
+;; markdown mode
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
