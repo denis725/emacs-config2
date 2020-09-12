@@ -752,3 +752,6 @@ modify `kill-ring'."
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
+
+(use-package markdown-toc
+  :ensure t)
