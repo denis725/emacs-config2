@@ -429,10 +429,12 @@ modify `kill-ring'."
   (add-hook 'python-mode-hook '(lambda () (set (make-local-variable 'yas-indent-line) 'fixed)))
 
   :config
-  (setq yas-snippet-dirs '("~/emacs.d/snippets"
-			   "~/Downloads/interesting-snippets"))
+  (setq yas-snippet-dirs '("~/emacs.d/snippets"))
   (yas-global-mode 1)
   (setq yas-indent-line 'fixed))
+
+(use-package yasnippet-snippets
+  :ensure t)
 
 
 ;; SEARCH
